@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import React from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import Home from './components/Home';
+import ProductDetails from './components/ProductDetails';
+import Cart from './components/Cart';
+import AddressForm from './components/AddressForm';
+import Auth from './components/Auth';
+import OrderHistory from './components/OrderHistory';
 import './App.css';
+
+const router = createBrowserRouter([
+  { path: '/', element: <Auth /> },
+  { path: '/home', element: <Home /> },
+  { path: '/product/:productId', element: <ProductDetails /> },
+  { path: '/cart', element: <Cart /> },
+  { path: '/address', element: <AddressForm /> },
+  { path: '/order-history', element: <OrderHistory /> },
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   );
 }
 
